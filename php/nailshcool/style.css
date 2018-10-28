@@ -1,0 +1,9 @@
+.nav_my{
+	    /*flex: inherit;*/
+	    display: flex;
+	    align-items: flex-end
+	    font-size: 30px;
+}
+body{
+	background-color: #000;
+}
