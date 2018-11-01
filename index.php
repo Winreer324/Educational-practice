@@ -1,3 +1,9 @@
+<?php
+
+require_once 'php/dbClass.php'; //подключаем файл с классом подключения к БД
+$connect = new DBConnection(); //создаём экземпляр класса подключения к БД
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
