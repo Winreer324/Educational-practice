@@ -1,31 +1,28 @@
 <?php
 
-$host='localhost'; // ваш хост
-$name='barbershop'; // ваша бд
-$user='root'; // пользователь бд
-$pass='123456'; // пароль к бд
+require_once "dbClass.php"; //подключаем наш класс подключения к БД
 
-$conn = mysql_connect('localhost', 'root', '123456') or die(mysql_error()); // коннект с сервером бд
-mysql_select_db('barbershop', $conn);
-// if(!$conn)
-// {
-//     throw new Exception('Не удалось подключиться к базе данных! Проверьте параметры подключения');
-// }
-// if(!mysql_select_db($sdd_db_name, $conn)) // выбор бд
-// {
-//     throw new Exception("Не удалось выбрать базу данных {$ssd_db_name}!");
-// }
-$result = mysql_query('SELECT * FROM `data_person`', $conn) or die(mysql_error()); // запрос на выборку
+$conn = new ConnectDB(); //создаём экземпляр класса
+$operationType = $_POST['action']; //получаем тип операции к БД полученный из суперглобального массива POST, тип операции храним на кнопке выполняющей ту или иную операцию
 
-if($conn == true) echo "super";
-else echo "not db";
-// if(!$result)
-// {
-//     throw new Exception(sprintf('Не удалось выполнить запрос к БД, код ошибки %d, текст ошибки: %s', mysql_errno($conn), mysql_error($conn)));
-// }
-
-	// while($row = mysql_fetch_array($result))
-	// {
-	//     echo '<p>Запись id='.$row['id'].'. Текст: '.$row['text'].'</p>';// выводим данные
-	// }
-?>
+if ($operationType == 'update') { //собираем данные для выполнения update
+	$table = $_POST['table'];
+	$id = $_POST['id'];
+	$types = $_POST['types'];
+	$fields = $_POST['fields'];
+	$values = $_POST['values'];
+	$conn->makePreparedQuery($table, $operationType, $id, $types, $field, $values);
+}
+if ($operationType == 'insert') { //собираем данные для выполнения inserts
+	$table = $_POST['table'];
+	$id = $_POST['id'];
+	$types = $_POST['types'];
+	$fields = $_POST['fields'];
+	$values = $_POST['values'];
+	$conn->makePreparedQuery(($table, $operationType, $id, $types, $field, $values);
+}
+if ($operationType == 'delete') { //собираем данные для выполнения delete
+	$table = $_POST['table'];
+	$id = $_POST['id'];
+	$conn->makePreparedQuery($table, $id);
+}
