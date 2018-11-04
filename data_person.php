@@ -27,10 +27,10 @@
 			<!--  -->
 			<div class="row person creat_input  pt-4 pb-5 ">
 				<input class="item col-md-1 ml-5 " type="text" placeholder="#">
-				<input class="item col-md-2 ml-4 " type="text" placeholder="Имя">
-				<input class="item col-md-2 ml-4 " type="text" placeholder="Фамилия">
-				<input class="item col-md-2 ml-4 " type="text" placeholder="Отчество">
-				<input class="item col-md-1 ml-4 " type="text" placeholder="Телефон">
+				<input class="item col-md-2 ml-4 " data-type='s' name='Fname' type="text" placeholder="Имя">
+				<input class="item col-md-2 ml-4 " data-type='s' name='Lname' type="text" placeholder="Фамилия">
+				<input class="item col-md-2 ml-4 " data-type='s' name='Sname' type="text" placeholder="Отчество">
+				<input class="item col-md-1 ml-4 " data-type='s' name='phone' type="text" placeholder="Телефон">
 				<div class="row ml-5 test">
 					<button class="btn_creat_data_person_true border-primary blue-gradient btn">
 						<i class="creat_check">add</i>
@@ -54,8 +54,8 @@
 		<hr>
 		<!--  -->
 		<!-- <div class="row person input pt-4 pb-5 mr-0"> -->
-
-			<!-- <input class="item col-md-1 ml-5 " type="text" placeholder="#">
+<!-- 
+			<input class="item col-md-1 ml-5 " type="text" placeholder="#">
 			<input class="item col-md-2 ml-4 " type="text" placeholder="Имя">
 			<input class="item col-md-2 ml-4 " type="text" placeholder="Фамилия">
 			<input class="item col-md-2 ml-4 " type="text" placeholder="Отчество">
@@ -69,7 +69,7 @@
                   {
                   	echo "
                   	<div class='row person input pt-4 pb-5 mr-0'>
-						<input class='item col-md ml-5 ' type='text' placeholder='#' value='{$data[$i]['id_data_person']}'>
+						<input class='item col-md ml-5 ' data-type='s' name='name' type='text' placeholder='#' value='{$data[$i]['id_data_person']}'>
 						<input class='item col-md-2 ml-4 ' type='text' placeholder='Фамилия' value='{$data[$i]['Lname']}'>
 						<input class='item col-md-2 ml-4 ' type='text' placeholder='Имя' value='{$data[$i]['Fname']}'> 
 						<input class='item col-md-2 ml-4 ' type='text' placeholder='Отчество' value='{$data[$i]['Sname']}'>
@@ -77,7 +77,7 @@
 
 						<div class='row ml-5 int'>
 							<div class='show'>
-								<button class='btn_change_false border-primary blue-gradient btn ty'>
+								<button class='btn_change_edit border-primary blue-gradient btn ty'>
 									<i class='fa fa-edit'></i> 
 								</button>
 								<button class='btn_delate ml-3 border-primary blue-gradient btn ty'>
@@ -85,10 +85,10 @@
 								</button>
 							</div>
 							<div class='hide'>
-								<button class='btn_change_false border-primary blue-gradient btn ty'> 
+								<button class='btn_change_check border-primary blue-gradient btn ty'> 
 									<i class='fa fa-check'></i>
 								</button>
-								<button class='btn_delate ml-3 border-primary blue-gradient btn ty'> 
+								<button class='btn_delate_close ml-3 border-primary blue-gradient btn ty'> 
 									<i class='fa fa-close'></i>
 								</button>
 							</div>

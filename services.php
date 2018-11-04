@@ -48,31 +48,67 @@
 		</div>
 		<hr>
 		<!--  -->
-		<div class="row  mr-0 pt-4 pb-5 ">
+		<!-- <div class="row  mr-0 pt-4 pb-5 ">
 			<input class="item col-md-1 ml-5 " type="text" placeholder="#">
 			<input class="item col-md-2 ml-5 " type="date" placeholder="Дата посещения">
-			<input class="item col-md-2 ml-5 " type="text" placeholder="Услуга"> 
+			<input class="item col-md-2 ml-5 " type="text" placeholder="Услуга">  -->
 
-			<div class="row ml-5 int">
-				<div class="show">
-					<button class="btn_change_false border-primary blue-gradient btn ty">
-						<i class="fa fa-edit"></i> 
+			<?php
+                  $query = "SELECT * FROM services"; //записываем запрос на выборку данных
+                  $queryResult = $connect->makeUnpreparedQuery($query); //выполняем запрос записываем ответ MySQL в $queryResult
+                  $data = $connect->fetch($queryResult); //данные полученные из MySQL преабоазовываем в ассоциативный массив
+                  for($i = 0, $count = sizeof($data); $i < $count; $i++) // выводим данные в виде строк HTML-таблицы 
+                  {
+                  	echo "
+                  	<div class='row person input pt-4 pb-5 mr-0 ml-2'>
+						<input class='item col-md-2 ml-3 ' type='text' placeholder='#' value='{$data[$i]['id_services']}'>
+						<input class='item col-md-2 ml-4 ' type='date' placeholder='' value='{".@$data[$i]["services_data_visit_id"]."}'>
+						<input class='item col-md-2 ml-4 ' type='text' placeholder='Услуга' value='{$data[$i]['services']}'>    
+
+						<div class='row ml-5 int'>
+							<div class='show'>
+								<button class='btn_change_edit border-primary blue-gradient btn ty'>
+									<i class='fa fa-edit'></i> 
+								</button>
+								<button class='btn_delate ml-3 border-primary blue-gradient btn ty'>
+									<i class='fa fa-trash'></i> 
+								</button>
+							</div>
+							<div class='hide'>
+								<button class='btn_change_check border-primary blue-gradient btn ty'> 
+									<i class='fa fa-check'></i>
+								</button>
+								<button class='btn_delate_close ml-3 border-primary blue-gradient btn ty'> 
+									<i class='fa fa-close'></i>
+								</button>
+							</div>
+						</div>
+
+					</div>
+                  	";                  
+                  }
+                 ?>	
+
+<!-- 			<div class='row ml-5 int'>
+				<div class='show'>
+					<button class='btn_change_edit border-primary blue-gradient btn ty'>
+						<i class='fa fa-edit'></i> 
 					</button>
-					<button class="btn_delate ml-3 border-primary blue-gradient btn ty">
-						<i class="fa fa-trash"></i> 
+					<button class='btn_delate ml-3 border-primary blue-gradient btn ty'>
+						<i class='fa fa-trash'></i> 
 					</button>
 				</div>
-				<div class="hide">
-					<button class="btn_change_false border-primary blue-gradient btn ty"> 
-						<i class="fa fa-check"></i>
+				<div class='hide'>
+					<button class='btn_change_check border-primary blue-gradient btn ty'> 
+						<i class='fa fa-check'></i>
 					</button>
-					<button class="btn_delate ml-3 border-primary blue-gradient btn ty"> 
-						<i class="fa fa-close"></i>
+					<button class='btn_delate_close ml-3 border-primary blue-gradient btn ty'> 
+						<i class='fa fa-close'></i>
 					</button>
 				</div>
-			</div>		
+			</div> -->		
 
-		</div> 
+		<!-- </div>  -->
 	</div>
 
 <?php 
