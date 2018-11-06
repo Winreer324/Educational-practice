@@ -3,7 +3,7 @@
 
 ?>
 
-	<div class="card mr-5 ml-5 mb-5" style="margin-top: 150px">
+	<div id="staff" class="card mr-5 ml-5 mb-5" style="margin-top: 150px">
 		<div class=" max-lg-5">
 			<div class="container-fluid pt-3">
 				<div class="d-flex justify-content-end border=buttom border-primary pb-3">
@@ -18,15 +18,13 @@
 	<!-- creat new staff -->
 	<div class="creat card mb-5">
 		<div class="row"><p class="text-center text-primary mt-5 " style="margin-left: 600px; font-size:30px;">Введите данные</p></div>
-		<div class="row  mr-0 pt-4"> 
-			<div class="item ml-5 col-md-2">#</div>
+		<div class="row  mr-0 pt-4">  
 			<div class="item col-md-2">Должность</div>
 			<div class="item col-md-2">Зарплата</div>
 			<div class="item col-md-2">Данные человека</div> 
 		</div>
 		<!--  -->
-		<div class="row person creat_input  pt-4 pb-5 ">
-			<input class="item col-md-2 ml-5 " type="text" placeholder="#">
+		<div class="row person creat_input  pt-4 pb-5 "> 
 			<input class="item col-md-2 ml-4 " type="text" placeholder="Должность">
 			<input class="item col-md-2 ml-4 " type="text" placeholder="Зарплата">
 			<input class="item col-md-2 ml-4 " type="text" placeholder="Данные человека">
@@ -65,7 +63,7 @@
                   {
                   	echo "
                   	<div class='row person input pt-4 pb-5 mr-0'>
-						<input class='item col-md ml-5 ' type='text' placeholder='#' value='{$data[$i]['id_staff']}'>
+						<input class='item col-md ml-5 id_id' type='text' placeholder='#' value='{$data[$i]['id_staff']}'>
 						<input class='item col-md-2 ml-4 ' type='text' placeholder='Должность' value='{$data[$i]['position']}'>
 						<input class='item col-md-2 ml-4 ' type='text' placeholder='Зарплата' value='{$data[$i]['salary']}'> 
 						<input class='item col-md-2 ml-4 ' type='text' placeholder='Данные человека' value='{$data[$i]['data_person_id']}'>   

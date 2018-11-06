@@ -3,7 +3,7 @@
 
 ?>
 
-	<div class="card mr-5 ml-5 mb-5" style="margin-top: 150px">
+	<div id="services" class="card mr-5 ml-5 mb-5" style="margin-top: 150px">
 		<div class=" max-lg-5">
 			<div class="container-fluid pt-3">
 				<div class="d-flex justify-content-end border=buttom border-primary pb-3">
@@ -18,15 +18,13 @@
 	<!-- creat new services -->
 	<div class="creat card mb-5">
 		<div class="row"><p class="text-center text-primary mt-5 " style="margin-left: 600px; font-size:30px;">Введите данные</p></div>
-		<div class="row  mr-0 pt-4"> 
-			<div class="item ml-5 col-md-2">#</div>
+		<div class="row  mr-0 pt-4">  
 			<div class="item col-md-2">Дата посещения</div>
 			<div class="item col-md-2">Услуга</div> 
 		</div>
 		<!--  -->
-		<div class="row person creat_input  pt-4 pb-5 ">
-			<input class="item col-md-1 ml-5 " type="text" placeholder="#">
-			<input class="item col-md-2 ml-5 " type="date" placeholder="Дата посещения">
+		<div class="row person creat_input  pt-4 pb-5 "> 
+			<input class="item col-md-2 ml-5 " type="text" placeholder="Дата посещения">
 			<input class="item col-md-2 ml-5 " type="text" placeholder="Услуга"> 
 			<div class="row ml-5 test">
 				<button class="btn_creat_services_true border-primary blue-gradient btn">
@@ -52,7 +50,7 @@
 			<input class="item col-md-1 ml-5 " type="text" placeholder="#">
 			<input class="item col-md-2 ml-5 " type="date" placeholder="Дата посещения">
 			<input class="item col-md-2 ml-5 " type="text" placeholder="Услуга">  -->
-
+<!-- <input class='item col-md-2 ml-4 ' type='text' placeholder='' value='{".@$data[$i]["services_data_visit_id"]."}'> -->
 			<?php
                   $query = "SELECT * FROM services"; //записываем запрос на выборку данных
                   $queryResult = $connect->makeUnpreparedQuery($query); //выполняем запрос записываем ответ MySQL в $queryResult
@@ -61,8 +59,8 @@
                   {
                   	echo "
                   	<div class='row person input pt-4 pb-5 mr-0 ml-2'>
-						<input class='item col-md-2 ml-3 ' type='text' placeholder='#' value='{$data[$i]['id_services']}'>
-						<input class='item col-md-2 ml-4 ' type='date' placeholder='' value='{".@$data[$i]["services_data_visit_id"]."}'>
+						<input class='item col-md-2 ml-3 id_id' type='text' placeholder='#' value='{$data[$i]['id_services']}'>
+						<input class='item col-md-2 ml-4 ' type='text' placeholder='' value='{$data[$i]['services_date_visit_id']}'>
 						<input class='item col-md-2 ml-4 ' type='text' placeholder='Услуга' value='{$data[$i]['services']}'>    
 
 						<div class='row ml-5 int'>

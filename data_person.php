@@ -3,7 +3,7 @@
 	// $stmt = "DELETE FROM `data_person` WHERE `id_data_person`=50 ; ";
 ?>
 
-	<div class="card mr-5 ml-5 mb-5" style="margin-top: 150px">
+	<div id="data_person" class="card mr-5 ml-5 mb-5" style="margin-top: 150px">
 		<div class=" max-lg-5">
 			<div class="container-fluid pt-3">
 				<div class="d-flex justify-content-end border=buttom border-primary pb-3">
@@ -129,6 +129,41 @@
 			
 		<!-- </div> -->
 	</div>
+	<!-- <div>
+						<?php
+                  $query = "SELECT COLUMN_NAME FROM  INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'data_person'"; //записываем запрос на выборку данных
+                  $queryResult = $connect->makeUnpreparedQuery($query); //выполняем запрос записываем ответ MySQL в $queryResult
+                  $data = $connect->fetch($queryResult); //данные полученные из MySQL преабоазовываем в ассоциативный массив
+                  for($i = 0, $count = sizeof($data); $i < $count; $i++) // выводим данные в виде строк HTML-таблицы 
+                  {
+                  	echo "
+                  	<div class='row person input pt-4 pb-5 mr-0'>
+						<input class='item col-md ml-5 id_id'  data-type='s' name='id'  type='text' placeholder='#' value='{$data[$i]}'>     
+
+						<div class='row ml-5 int'>
+							<div class='show'>
+								<button class='btn_change_edit border-primary blue-gradient btn ty'>
+									<i class='fa fa-edit'></i> 
+								</button>
+								<button class='btn_delate ml-3 border-primary blue-gradient btn ty'>
+									<i class='fa fa-trash'></i> 
+								</button>
+							</div>
+							<div class='hide'>
+								<button class='btn_change_check border-primary blue-gradient btn ty'> 
+									<i class='fa fa-check'></i>
+								</button>
+								<button class='btn_delate_close ml-3 border-primary blue-gradient btn ty'> 
+									<i class='fa fa-close'></i>
+								</button>
+							</div>
+						</div>
+
+					</div>
+                  	";                  
+                  }
+                 ?>
+	</div> -->
 
 <?php 
 	include "footer.php";
