@@ -9,8 +9,8 @@
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="js/mdb.min.js"></script> 
 
-  <script type="text/javascript" src="myjs.js"></script> 
+  <!-- <script type="text/javascript" src="myjs.js"></script>  -->
   <!-- <script type="text/javascript" src="js.js"></script>  -->
-  <!-- <script type="text/javascript" src="script.js"></script>  -->
+  <script type="text/javascript" src="script.js"></script> 
 </body>
 </html>

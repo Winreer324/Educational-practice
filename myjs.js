@@ -1,4 +1,4 @@
-                                // data_person start
+// data_person start
 $(".creat").hide();
 let btn_change_true = true;
 // alert("sloll");
@@ -61,8 +61,8 @@ $(".person").find("input").attr("disabled",true);
 //   }  
 //   addShowInput();
 // });
-
-$(document).on("click",".btn_change_edit",function(){
+let up=[];
+$(document).on("click",".btn_change_edit",function(e){
  
   $(this).parents(".int").children(".show").hide();
   $(this).parents(".int").children(".hide").show(); 
@@ -79,10 +79,95 @@ $(document).on("click",".btn_change_edit",function(){
    $(this).parents(".input").children("input").attr("disabled",false); 
    close=true;
   }
+//     e.preventDefault();
+//   // let form = $(this).parent();
+// // $(".creat_input").parent().find("input").attr("disabled",false); 
+
+//   let inputs = $(this).parents(".input").find("input");
+//   let fields = [];
+//   let values = [];
+//   let types = "";
+//   let action = 'update';
+//   let table = 'data_person';
+//    up = [];
+//   inputs.each(function() {
+//     fields.push($(this).attr('name'));
+//     values.push($(this).val());
+//     types += $(this).attr('data-type');
+//     console.log(values);
+//   })
+//   up.push(values[0]);
+//   up.push(values[1]);
+//   up.push(values[2]);
+//   up.push(values[3]);
+//   up.push(values[4]);
+
+//   $.ajax({
+//     url: '../Educational-practice/php/CRUD.php',
+//     type: 'POST',
+//     data: {
+//       table: table,
+//       action: action,
+//       up: up,
+//       fields: JSON.stringify(fields),
+//       values: JSON.stringify(values),
+//       up: JSON.stringify(up),
+//       types: types,
+//     },
+//     success: function(response) {
+//       console.log(response);
+//       // location.reload();
+//       console.log("Данные отправленны edit");
+//     },
+//     error: function(error) {
+//       console.log(error);
+//       console.log("Данные не отправленны edit");
+//     }
+//   })
 });
 
-$(document).on("click",".btn_delate",function(){
-  if(!close){
+$(document).on("click",".btn_delate",function(e){
+
+
+  e.preventDefault();
+  // let form = $(this).parent();
+// $(".creat_input").parent().find("input").attr("disabled",false); 
+let id = $(this).parents(".input").find(".id_id").val();
+console.log(id);
+  let inputs = $(this).parents(".input").find("input");
+  let fields = [];
+  let values = [];
+  let types = ""
+  let action = 'delete';
+  let table = 'data_person';
+  inputs.each(function() {
+    fields.push($(this).attr('name'));
+    values.push($(this).val());
+    types += $(this).attr('data-type');
+    console.log(inputs);
+  })
+  $.ajax({
+    url: '../Educational-practice/php/CRUD.php',
+    type: 'POST',
+    data: {
+      table: table,
+      id: id,
+      action: action,
+      fields: JSON.stringify(fields),
+      values: JSON.stringify(values),
+      types: types,
+    },
+    success: function(response) {
+      console.log(response);
+      // location.reload();
+      console.log("Данные отправленны delete");
+    },
+    error: function(error) {
+      console.log(error);
+      console.log("Данные не отправленны delete");
+    }
+  })
+  if(close){
   let del = $(this).parent().parent().parent(); 
 
   del.find("input").remove();
@@ -90,13 +175,58 @@ $(document).on("click",".btn_delate",function(){
   }
 });
 
-$(document).on("click",".btn_change_check",function(){
+$(document).on("click",".btn_change_check",function(e){
 
   $(this).parents(".int").children(".show").show();
   $(this).parents(".int").children(".hide").hide(); 
   close=false;
    $(this).parents(".input").children("input").attr("disabled",true); 
   addShowInput();
+
+    e.preventDefault();
+  // let form = $(this).parent();
+// $(".creat_input").parent().find("input").attr("disabled",false); 
+
+  let inputs = $(this).parents(".input").find("input");
+  let fields = [];
+  let values = [];
+  let types = "";
+  let action = 'update';
+  let table = 'data_person';
+   up = [];
+  inputs.each(function() {
+    fields.push($(this).attr('name'));
+    values.push($(this).val());
+    types += $(this).attr('data-type');
+    console.log(values);
+  })
+  // up.push(values[0]);
+  // up.push(values[1]);
+  // up.push(values[2]);
+  // up.push(values[3]);
+  // up.push(values[4]);
+
+  $.ajax({
+    url: '../Educational-practice/php/CRUD.php',
+    type: 'POST',
+    data: {
+      table: table,
+      action: action, 
+      fields: JSON.stringify(fields),
+      values: JSON.stringify(values), 
+      types: types,
+    },
+    success: function(response) {
+      console.log(response);
+      // location.reload();
+      console.log("Данные отправленны edit");
+    },
+    error: function(error) {
+      console.log(error);
+      console.log("Данные не отправленны edit");
+    }
+  })
+
 });
 
 $(document).on("click",".btn_delate_close",function(){
@@ -155,11 +285,11 @@ $(document).on("click",".btn_creat_data_person_true", function(e){
     success: function(response) {
       console.log(response);
       // location.reload();
-      console.log("Данные отправленны");
+      console.log("Данные отправленны creat");
     },
     error: function(error) {
       console.log(error);
-      console.log("Данные не отправленны");
+      console.log("Данные не отправленны creat");
     }
   })
 

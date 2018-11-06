@@ -32,53 +32,58 @@ class DBConnection
 		if($q) return $q;
 		else return null;
 	}
-
-	/*
-		Данная функция собирает и выполняет подготовленный запрос (http://php.net/manual/ru/mysqli.quickstart.prepared-statements.php) в зависимости от типа операции (INSERT, UPDATE, DELETE)
-		Принимает на вход таблицу, тип операции, id строки с которой производятся манипуляции, типы значений в виде строки (напр. "sssi"), поля таблицы и значения этих полей
-		первые два параметра являются обязательными, остальные являются параметрами по умолчанию (http://php.net/manual/ru/functions.arguments.php), по умолчанию во всех параметрах по умолчанию пустая строка
-	*/
+ 
 	public function makePreparedQuery($table, $operationType, $rowId = "", $valuesTypes = "", $fields = "", $values = "")
 	{
-		$placeholders = []; //создаём массив, где будем хранить знаки вопроса, количество которых зависит от количества полей (смотрите статью про то, как выглядит подготовленный запрос)
-		for ($i=0; $i < sizeof($fields); $i++) //цикл для записи знаков вопроса в $placeholders
-		{ 
-			array_push($placeholders, '?');
-		}
-		$impPlaceholders = implode(",", $placeholders); //формируем строку из знаков вопроса разделённых запятой
-		$impFields = implode(",", $fields); //формируем строку из полей разделённых запятой
-		$impValues = implode(",", $placeholders); //формируем строку из значений полей разделённых запятой
-		// далее в зависимости от типа операции выполняются определенные действия
+		if($operationType == 'delete'){
+			$query = "DELETE FROM $table WHERE id_data_person=$rowId ; ";
+			// $stmt->execute();
+			$stmt = $this->conn->prepare($query);
+			// $sql = "DELETE FROM pages WHERE id=$id"; 
+			$stmt->execute(); 
+			var_dump("delete this row");
+		}else var_dump("error delete");
+
 		if ($operationType == 'insert')
 		{
-			$query = "INSERT INTO $table ($impFields) VALUES ($impPlaceholders)";
+			// $query = "INSERT INTO $table ($impFields) VALUES ($impPlaceholders)";
+			$fname = $values[0];
+			$lname = $values[1];
+			$sname = $values[2];
+			$phone = $values[3];
+
+			// var_dump($fname);
+			$query = "INSERT INTO $table  (`id_data_person`, `phone`, `Fname`, `Lname`, `Sname`) VALUES (NULL, '$phone', '$fname', '$lname', '$sname');";
+			// -- $query = "INSERT INTO `data_person`  (`id_data_person`, `phone`, `Fname`, `Lname`, `Sname`) VALUES (NULL, 'phone', 'fname', 'lname', 'sname');";
 			var_dump($query);
 			$stmt = $this->conn->prepare($query);  //подготавливается запроc
-		}
+			$stmt->execute(); //запрос выполняется 
+		}else var_dump("error insert");
+
 		if ($operationType == 'update')
 		{
-			$query = "UPDATE $table SET ";
-			$valuesAssoc = array_combine($fields, $values); //создаётся ассоциативный массив вида поля => значения
-			foreach ($valuesAssoc as $key => $value) {
-				if ($key != 'id')
-				{
-					$query .= "$key=?,"; //формируется строка запроса
-				}
-			}
-			$query = substr($query, 0, -1); //убирается лишняя запятая в конце
-			$query .= " WHERE id=?"; //добавляется условие определяющее какую строку мы обновляем
-			$stmt = $this->conn->prepare($query); //запрос подготавливается после того, как был сформирован
-		}
-		if ($operationType == 'delete') 
-		{ 
-			$stmt = $this->conn->query("DELETE FROM $table WHERE id=?");
-		}
-		var_dump($values);
-		var_dump($valuesTypes);
-		$stmt->bind_param($valuesTypes,...$values); //bind_param привязывает значения полей к параметрам подготавливаемого запроса
-		$stmt->execute(); //запрос выполняется 
+			$arr = json_decode($values, true);
+			var_dump($arr);
+			$id = $arr[0];
+			$fname = $arr[1];
+			$lname = $arr[2];
+			$sname = $arr[3];
+			$phone = $arr[4];
+
+			var_dump($values);
+			var_dump($id);
+			var_dump($fname);
+			var_dump($lname);
+			var_dump($sname);
+			var_dump($phone);
+
+			$query = "UPDATE $table SET `id_data_person`='$id',`phone`=$phone,`Fname`='$fname',`Lname`='$lname',`Sname`='$sname' WHERE `id_data_person`='$id' ;";
+			  
+			var_dump($query);
+			$stmt = $this->conn->prepare($query);  //подготавливается запроc
+			$stmt->execute(); //запрос выполняется 
+		} else var_dump("error update");
 	}
-	
 	public function fetch($result) //данная функция позволяет преобразовать результат полученный из MySQL в ассоциативный массив, принимает на вход результат запроса к MySQL
 	{
 		return  $result->fetch_all($mode  = self::FETCH_MODE);

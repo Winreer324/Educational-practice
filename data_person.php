@@ -1,5 +1,6 @@
 <?php
 	include "index.php";
+	// $stmt = "DELETE FROM `data_person` WHERE `id_data_person`=50 ; ";
 ?>
 
 	<div class="card mr-5 ml-5 mb-5" style="margin-top: 150px">
@@ -13,12 +14,12 @@
 		</div>
 	</div>
 	<hr class="hr ml-5 mr-5 mb-4 blue-gradient ">
-
+	
 	<!-- creat new data -->
 		<div class="creat card mb-5">
 			<div class="row"><p class="text-center text-primary mt-5 " style="margin-left: 600px; font-size:30px;">Введите данные</p></div>
 			<div class="row  mr-0 pt-4"> 
-				<div class="item ml-5 col-md-2">#</div>
+				<!-- <div class="item ml-5 col-md-2">#</div> -->
 				<div class="item col-md-2">Имя</div>
 				<div class="item col-md-2">Фамилия</div>
 				<div class="item col-md-2">Отчество</div>
@@ -26,7 +27,7 @@
 			</div>
 			<!--  -->
 			<div class="row person creat_input  pt-4 pb-5 ">
-				<input class="item col-md-1 ml-5 " type="text" placeholder="#">
+				<!-- <input class="item col-md-1 ml-5 " type="text" placeholder="#"> -->
 				<input class="item col-md-2 ml-4 " data-type='s' name='Fname' type="text" placeholder="Имя">
 				<input class="item col-md-2 ml-4 " data-type='s' name='Lname' type="text" placeholder="Фамилия">
 				<input class="item col-md-2 ml-4 " data-type='s' name='Sname' type="text" placeholder="Отчество">
@@ -69,11 +70,11 @@
                   {
                   	echo "
                   	<div class='row person input pt-4 pb-5 mr-0'>
-						<input class='item col-md ml-5 ' data-type='s' name='name' type='text' placeholder='#' value='{$data[$i]['id_data_person']}'>
-						<input class='item col-md-2 ml-4 ' type='text' placeholder='Фамилия' value='{$data[$i]['Lname']}'>
-						<input class='item col-md-2 ml-4 ' type='text' placeholder='Имя' value='{$data[$i]['Fname']}'> 
-						<input class='item col-md-2 ml-4 ' type='text' placeholder='Отчество' value='{$data[$i]['Sname']}'>
-						<input class='item col-md-2 ml-4 ' type='text' placeholder='Телефон' value='{$data[$i]['phone']}' >     
+						<input class='item col-md ml-5 id_id'  data-type='s' name='id'  type='text' placeholder='#' value='{$data[$i]['id_data_person']}'>
+						<input class='item col-md-2 ml-4 '  data-type='s' name='Lname' type='text' placeholder='Фамилия' value='{$data[$i]['Lname']}'>
+						<input class='item col-md-2 ml-4 '  data-type='s' name='Fname' type='text' placeholder='Имя' value='{$data[$i]['Fname']}'> 
+						<input class='item col-md-2 ml-4 '  data-type='s' name='Sname' type='text' placeholder='Отчество' value='{$data[$i]['Sname']}'>
+						<input class='item col-md-2 ml-4 '  data-type='s' name='phone' type='text' placeholder='Телефон' value='{$data[$i]['phone']}' >     
 
 						<div class='row ml-5 int'>
 							<div class='show'>
