@@ -26,8 +26,8 @@
 		<!--  -->
 		<div class="row person creat_input  pt-4 pb-5 ">
 			<!-- <input class="item col-md-1 ml-5 " type="text" placeholder="#"> -->
-			<input class="item col-md-2 ml-4 " type="text" placeholder="Пользователь">
-			<input class="item col-md-2 ml-4 " type="date" placeholder="Дата посещения"> 
+			<input class="item col-md-2 ml-4 " data-type='i' name="visitors_id" type="text" placeholder="Пользователь">
+			<input class="item col-md-2 ml-4 " data-type='s' name="date" type="date" placeholder="Дата посещения"> 
 			<div class="row ml-5 test">
 				<button class="btn_creat_true border-primary blue-gradient btn">
 					<i class="creat_check">add</i>
@@ -47,11 +47,6 @@
 			<div class="item col-md-2">Дата посещения</div> 
 		</div>
 		<hr> 
-		<!--  -->
-		<!-- <div class="row  mr-0 pt-4 pb-5 ">
-			<input class="item col-md-1 ml-5 " type="text" placeholder="#">
-			<input class="item col-md-2 ml-4 " type="text" placeholder="Пользователь">
-			<input class="item col-md-2 ml-4 " type="date" placeholder="Дата посещения">  -->
 
 				<?php
                   $query = "SELECT * FROM date_visit"; //записываем запрос на выборку данных
@@ -61,16 +56,16 @@
                   {
                   	echo "
                   	<div class='row person input pt-4 pb-5 mr-0 ml-2'>
-						<input class='item col-md-2 ml-3 id_id ' type='text' placeholder='#' value='{$data[$i]['id_date_visit']}'>
-						<input class='item col-md-2 ml-4 ' type='text' placeholder='Пользователь' value='{$data[$i]['visitors_id']}'>
-						<input class='item col-md-2 ml-4 ' type='date' placeholder='ДДата посещения' value='{$data[$i]['date']}'>    
+						<input class='item col-md-2 ml-3 id_id ' data-type='i' name='id_date_visit' type='text' placeholder='#' value='{$data[$i]['id_date_visit']}'>
+						<input class='item col-md-2 ml-4 ' data-type='i' name='visitors_id' type='text' placeholder='Пользователь' value='{$data[$i]['visitors_id']}'>
+						<input class='item col-md-2 ml-4 ' data-type='s' name='date' type='date' placeholder='ДДата посещения' value='{$data[$i]['date']}'>    
 
 						<div class='row ml-5 int'>
 							<div class='show'>
 								<button class='btn_change_edit border-primary blue-gradient btn ty'>
 									<i class='fa fa-edit'></i> 
 								</button>
-								<button class='btn_delate ml-3 border-primary blue-gradient btn ty'>
+								<button class='btn_delate ml-3 border-primary blue-gradient btn ty' >
 									<i class='fa fa-trash'></i> 
 								</button>
 							</div>
@@ -89,28 +84,8 @@
                   }
                  ?>	
 
-
-<!-- 			<div class='row ml-5 int'>
-				<div class='show'>
-					<button class='btn_change_edit border-primary blue-gradient btn ty'>
-						<i class='fa fa-edit'></i> 
-					</button>
-					<button class='btn_delate ml-3 border-primary blue-gradient btn ty'>
-						<i class='fa fa-trash'></i> 
-					</button>
-				</div>
-				<div class='hide'>
-					<button class='btn_change_check border-primary blue-gradient btn ty'> 
-						<i class='fa fa-check'></i>
-					</button>
-					<button class='btn_delate_close ml-3 border-primary blue-gradient btn ty'> 
-						<i class='fa fa-close'></i>
-					</button>
-				</div>
-			</div>	 -->
-
-		</div>
-		<!--  -->
+ 
+		</div> 
 	</div>
 
 <?php 

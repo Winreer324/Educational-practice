@@ -25,9 +25,9 @@
 		</div>
 		<!--  -->
 		<div class="row person creat_input  pt-4 pb-5 "> 
-			<input class="item col-md-2 ml-4 " type="text" placeholder="Дата посещения">
-			<input class="item col-md-2 ml-4 " type="text" placeholder="Данные человека">
-			<input class="item col-md-2 ml-4 " type="text" placeholder="Услуга">
+			<input class="item col-md-2 ml-4 " data-type='i' name="date_visit_id type="text" placeholder="Дата посещения">
+			<input class="item col-md-2 ml-4 " data-type='i' name="data_person_id" type="text" placeholder="Данные человека">
+			<input class="item col-md-2 ml-4 " data-type='s' name="services_id" type="text" placeholder="Услуга">
 			<div class="row ml-5 test">
 				<button class="btn_creat_true border-primary blue-gradient btn">
 					<i class="creat_check">add</i>
@@ -57,10 +57,10 @@
                   {
                   	echo "
                   	<div class='row person input pt-4 pb-5 mr-0 ml-2'>
-						<input class='item col-md-2 ml-3 id_id' type='text' placeholder='#' value='{$data[$i]['id_visitors']}'>
-						<input class='item col-md-2 ml-4 ' type='text' placeholder='' value='{$data[$i]['date_visit_id']}'>
-						<input class='item col-md-2 ml-4 ' type='text' placeholder='Данные человека' value='{$data[$i]['data_person_id']}'>    
-						<input class='item col-md-2 ml-4 ' type='text' placeholder='Услуга' value='{$data[$i]['services_id']}'>    
+						<input class='item col-md-2 ml-3 id_id' data-type='i' name='id_visitors' type='text' placeholder='#' value='{$data[$i]['id_visitors']}'>
+						<input class='item col-md-2 ml-4 ' data-type='s' name='date_visit_id' type='text' placeholder='' value='{$data[$i]['date_visit_id']}'>
+						<input class='item col-md-2 ml-4 ' data-type='s' name='data_person_id' type='text' placeholder='Данные человека' value='{$data[$i]['data_person_id']}'>    
+						<input class='item col-md-2 ml-4 ' data-type='s' name='services_id' type='text' placeholder='Услуга' value='{$data[$i]['services_id']}'>    
 
 						<div class='row ml-5 int'>
 							<div class='show'>

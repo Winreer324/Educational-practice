@@ -1,12 +1,7 @@
 <?php
 
-/*
-	Создание класса подключения к базе данных
-*/
-class DBConnection
-{
+class DBConnection {
 	protected $conn; //поле класса, которые создано для хранения подключения к MySQL
-
 	protected $defaults = [ //ассоциативный массив параметров используемых при настройке подключения к БД
 		'host' => 'localhost', //на локальном сервере адрес хоста - localhost
 		'user' => 'root', //пользователь в БД (root по умолчанию)
@@ -14,11 +9,8 @@ class DBConnection
 		'db' => 'barbershop', //название вашей БД в phpMyAdmin (MySQL)
 		'charset' => 'utf8', //используемая в БД кодировка символом
 	];
-
 	const FETCH_MODE = MYSQLI_ASSOC; //константа, которая хранит вид массива, в который попадут данные из результата запроса к MySQL
-
-	public function __construct() //конструктор класса, вызывается при создании экземпляра класса
-	{
+	public function __construct() { //конструктор класса, вызывается при создании экземпляра класса
 		$opt = [];
 		$opt = array_merge($this->defaults, $opt); //опции записанные в поле класса defaults записываются в $opt для удобства работы
 		$this->conn = new mysqli($opt['host'], $opt['user'], $opt['pass'], $opt['db']); //в поле класса $conn записывается подключение к БД и хранится там
@@ -32,175 +24,60 @@ class DBConnection
 		if($q) return $q;
 		else return null;
 	}
- 
-	public function makePreparedQuery($table, $operationType, $rowId = "", $valuesTypes = "", $fields = "", $values = "")
-	{
-		$getTable = $_POST['getTable'];
-		$getIDTable = $_POST['idTable']; 
+	public function makePreparedQuery($table, $operationType, $rowId = "", $valuesTypes = "", $fields = "", $values = ""){
+		$getIDTable = $_POST['id_table'];
+		// var_dump($getIDTable);
+		// var_dump($table);
+		// var_dump($rowId);
+		$placeholders = []; //создаём массив, где будем хранить знаки вопроса, количество которых зависит от количества полей (смотрите статью про то, как выглядит подготовленный запрос)
 
-		if($operationType == 'delete'){ 
+		for ($i=0; $i < @sizeof($fields); $i++) //цикл для записи знаков вопроса в $placeholders
+		{ 
+			array_push($placeholders, '?');
+		}
+		@$impPlaceholders = implode(",", $placeholders); //формируем строку из знаков вопроса разделённых запятой
+		@$impFields = implode(",", $fields); //формируем строку из полей разделённых запятой
+		$impValues = implode(",", $placeholders); //формируем строку из значений полей разделённых запятой
+		var_dump($impValues);
+		// далее в зависимости от типа операции выполняются определенные действия
+		if ($operationType == 'insert')
+		{
+			$query = "INSERT INTO $table ($impFields) VALUES ($impPlaceholders)";
+			$stmt = $this->conn->prepare($query); //подготавливается запроc
+			$stmt->bind_param($valuesTypes, ...$values);
+		}
+		if ($operationType == 'update')
+		{
+			$query = "UPDATE $table SET ";
+			$valuesAssoc = array_combine($fields, $values);
+			// var_dump($fields);
+			// var_dump($valuesAssoc);
+			$valuesAssoc['id'] = $rowId; //создаётся ассоциативный массив вида поля => значения
+			// var_dump($valuesAssoc);
+			foreach ($valuesAssoc as $key => $value) {
+				if ($key != 'id')
+				{
+					$query .= "$key=?,"; //формируется строка запроса
+				}
+			}
+			$query = substr($query, 0, -1); //убирается лишняя запятая в конце
+			$query .= " WHERE `$getIDTable`=?";
+			array_push($values, $rowId); //добавляется условие определяющее какую строку мы обновляем
+			$stmt = $this->conn->prepare($query); //запрос подготавливается после того, как был сформирован
+			$valuesTypes .= 'i';
+			$stmt->bind_param($valuesTypes, ...$values); 
+			var_dump("ok update this row");
+		}
+		if ($operationType == 'delete') 
+		{  
 			$query = "DELETE FROM $table WHERE `$getIDTable`='$rowId' ; ";
 			$stmt = $this->conn->prepare($query); 
-			$stmt->execute();  
-		}else var_dump("error delete");
-
-									//update
-			//data_person
-			if ($table == 'data_person' && $operationType == 'update')
-			{
-				$arr = json_decode($values, true); 
-				$id = $arr[0];
-				$fname = $arr[1];
-				$lname = $arr[2];
-				$sname = $arr[3];
-				$phone = $arr[4]; 
-
-				$query = "UPDATE $table SET `$getIDTable`='$id',`phone`='$phone',`Fname`='$fname',`Lname`='$lname',`Sname`='$sname' WHERE `$getIDTable`=$id;";
-				  
-				var_dump($query);
-				$stmt = $this->conn->prepare($query);  //подготавливается запроc
-				$stmt->execute(); //запрос выполняется 
-
-			} else var_dump("error update"); 
-			//data_person
-
-			//date_visit
-			if ($table == 'date_visit' && $operationType == 'update')
-			{
-				$arr = json_decode($values, true); 
-				$id = $arr[0];
-				$visitors_id = $arr[1];
-				$date = $arr[2]; 
-
-				$query = "UPDATE $table SET `$getIDTable`='$id',`visitors_id`='$visitors_id',`date`='$date' WHERE `$getIDTable`=$id;";
-				   
-				$stmt = $this->conn->prepare($query);  //подготавливается запроc
-				$stmt->execute(); //запрос выполняется 
-
-			} else var_dump("error update"); 
-			//date_visit
-
-			//services
-			if ($table == 'services' && $operationType == 'update')
-			{
-				$arr = json_decode($values, true); 
-				$id = $arr[0];
-				$services_date_visit_id = $arr[1];
-				$services = $arr[2];  
-
-				$query = "UPDATE $table SET `$getIDTable`='$id',`services_date_visit_id`='$services_date_visit_id',`services`='$services' WHERE `$getIDTable`=$id;";
-				   
-				$stmt = $this->conn->prepare($query);  //подготавливается запроc
-				$stmt->execute(); //запрос выполняется 
-			} else var_dump("error update"); 
-			//services
-
-			//staff
-			if ($table == 'staff' && $operationType == 'update')
-			{
-				$arr = json_decode($values, true); 
-				$id = $arr[0];
-				$position = $arr[1];
-				$salary = $arr[2];  
-				$data_person_id = $arr[3];  
-
-				$query = "UPDATE $table SET `$getIDTable`='$id',`position`='$position',`salary`='$salary',`data_person_id`='$data_person_id' WHERE `$getIDTable`='$id';";
-				  
-				var_dump($query);
-				$stmt = $this->conn->prepare($query);  //подготавливается запроc
-				$stmt->execute(); //запрос выполняется 
-
-			} else var_dump("error update"); 
-			//staff
-
-			//visitors
-			if ($table == 'visitors' && $operationType == 'update')
-			{
-				$arr = json_decode($values, true); 
-				$id = $arr[0];
-				$date_visit_id = $arr[1];
-				$data_person_id = $arr[2];  
-				$services_id = $arr[3];  
-
-				$query = "UPDATE $table SET `$getIDTable`='$id',`date_visit_id`='$date_visit_id',`data_person_id`='$data_person_id',`services_id`='$services_id' WHERE `$getIDTable`=$id;";
-				  
-				var_dump($query);
-				$stmt = $this->conn->prepare($query);  //подготавливается запроc
-				$stmt->execute(); //запрос выполняется 
-			} else var_dump("error update"); 
-			//visitors
-										//insert
-			//data_person
-			if ($table == 'data_person' && $operationType == 'insert')
-			{ 
-				$fname = $values[0];
-				$lname = $values[1];
-				$sname = $values[2];
-				$phone = $values[3];
-
-				
-				$query = "INSERT INTO $table  ( `phone`, `Fname`, `Lname`, `Sname`) VALUES ( '$phone', '$fname', '$lname', '$sname');"; 
-				
-				$stmt = $this->conn->prepare($query);  //подготавливается запроc
-				$stmt->execute(); //запрос выполняется  
-			}  
-			//data_person
-
-			//date_visit
-			if ($table == 'date_visit' && $operationType == 'insert')
-			{ 
-				$visitors_id = $values[0];
-				$date = $values[1];  
-				$query = "INSERT INTO $table  ( `visitors_id`, `date`) VALUES ( '$visitors_id', '$date');"; 
-
-				$stmt = $this->conn->prepare($query);  //подготавливается запроc
-				$stmt->execute(); //запрос выполняется  
-			} 
-			//date_visit
-
-			//services
-			if ($table == 'services' && $operationType == 'insert')
-			{ 
-				$services_date_visit_id = $values[0];
-				$services = $values[1]; 
-
-				$query = "INSERT INTO $table  ( `services_date_visit_id`, `services`) VALUES ( '$services_date_visit_id', '$services');";  
-
-				$stmt = $this->conn->prepare($query);  //подготавливается запроc
-				$stmt->execute(); //запрос выполняется  
-			} 
-			//services
-
-			//staff
-			if ($table == 'staff' && $operationType == 'insert')
-			{ 
-				$position = $values[0];
-				$salary = $values[1]; 
-				$data_person_id = $values[2]; 
-
-				$query = "INSERT INTO $table  (`position`, `salary`, `data_person_id` ) VALUES ( '$position', '$salary','$data_person_id');"; 
-
-				$stmt = $this->conn->prepare($query);  //подготавливается запроc
-				$stmt->execute(); //запрос выполняется  
-			} 
-			//staff
-
-			//visitors
-			if ($table == 'visitors' && $operationType == 'insert')
-			{ 
-				$date_visit_id = $values[0];
-				$data_person_id = $values[1]; 
-				$services_id = $values[2]; 
-
-				$query = "INSERT INTO $table  ( `date_visit_id`, `data_person_id`, `services_id` ) VALUES ( '$date_visit_id', '$data_person_id','$services_id');";  
-
-				$stmt = $this->conn->prepare($query);  //подготавливается запроc
-				$stmt->execute(); //запрос выполняется  
-			} 
-			//visitors
+			var_dump("ok, delete this row");
+		}
+		 //bind_param привязывает значения полей к параметрам подготавливаемого запроса
+		$stmt->execute(); //запрос выполняется
 	}
-	public function fetch($result) //данная функция позволяет преобразовать результат полученный из MySQL в ассоциативный массив, принимает на вход результат запроса к MySQL
-	{ 
- 		return  $result->fetch_all($mode  = self::FETCH_MODE);
-	} 
+	public function fetch($result) { //данная функция позволяет преобразовать результат полученный из MySQL в ассоциативный массив, принимает на вход результат запроса к MySQL
+		return $result->fetch_all($mode = self::FETCH_MODE);
+	}
 }

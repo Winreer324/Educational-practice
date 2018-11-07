@@ -3,9 +3,7 @@ $(".creat").hide();
 let btn_change_true = true;
 // alert("sloll");
 let edd_btn = true;
-let close = true;
-let getTable = "";
-let idTable = "";
+let close = true; 
 // event.preventDefault();
 $(".hide").hide();
 $(".person").find("input").attr("disabled",true);  
@@ -26,48 +24,35 @@ $(document).on("click",".btn_change_edit",function(e){
   }
 
 });
-
+//////////////
 $(document).on("click",".btn_delate",function(e){
   e.preventDefault(); 
-  let id = $(this).parents(".input").find(".id_id").val();
-  console.log(id);
-  // alert(id);
+  tr = $(this).parent().parent().parent();
   let inputs = $(this).parents(".input").find("input");
-  let fields = [];
   let values = [];
-  let types = ""
+  let types = 'i';
   let action = 'delete';
-  // let table = 'data_person';
   let table = showTable();
-  idTable = showIDTable();
-  getTable = showTable();
-  inputs.each(function() {
-    fields.push($(this).attr('name'));
-    values.push($(this).val());
-    types += $(this).attr('data-type');
-    console.log(inputs);
-  })
+  let id_table = showIDTable();
+  // let id = $(this).attr('.data-id');
+  let id = $(this).parents(".input").find(".id_id").val();
+  console.log("id = "+ id);
   $.ajax({
     url: 'php/CRUD.php',
     type: 'POST',
     data: {
       table: table,
-      id: id,
-      getTable: getTable,
-      idTable: idTable,
       action: action,
-      fields: JSON.stringify(fields),
-      values: JSON.stringify(values),
+      id: id,
+      id_table: id_table,
       types: types,
     },
     success: function(response) {
-      console.log(response);
+      console.log(response); 
       location.reload();
-      console.log("Данные отправленны delete "+getTable);
     },
     error: function(error) {
       console.log(error);
-      console.log("Данные не отправленны delete");
     }
   })
   if(close){
@@ -85,50 +70,44 @@ $(document).on("click",".btn_change_check",function(e){
   close=false;
    $(this).parents(".input").children("input").attr("disabled",true); 
   addShowInput();
- let id = $(this).parents(".input").find(".id_id").val();
-  console.log(id);
-    e.preventDefault(); 
 
+
+
+    e.preventDefault();  
   let inputs = $(this).parents(".input").find("input");
-  let fields = [];
   let values = [];
-  let types = "";
+  let fields = [];
+  let types = '';
   let action = 'update';
-  // let table = 'data_person';
   let table = showTable();
-  idTable = showIDTable();
-   // up = [];
+  let id = $(this).parents(".input").find(".id_id").val();
+  let id_table = showIDTable();
+  console.log(id); 
   inputs.each(function() {
     fields.push($(this).attr('name'));
     values.push($(this).val());
     types += $(this).attr('data-type');
-    console.log(values);
-  }) 
-
+  })
   $.ajax({
     url: 'php/CRUD.php',
     type: 'POST',
     data: {
       table: table,
-      id: id,
-      getTable: getTable,
-      idTable: idTable,
       action: action,
+      id: id,
+      id_table: id_table,
       fields: JSON.stringify(fields),
-      values: JSON.stringify(values), 
+      values: JSON.stringify(values),
       types: types,
     },
     success: function(response) {
       console.log(response);
-      location.reload();
-      console.log("Данные отправленны edit");
+      location.reload(); 
     },
     error: function(error) {
       console.log(error);
-      console.log("Данные не отправленны edit");
     }
   })
-
 });
 
 $(document).on("click",".btn_delate_close",function(){
@@ -140,8 +119,7 @@ $(document).on("click",".btn_delate_close",function(){
 
   $(this).parents(".input").children("input").attr("disabled",true); 
 }); 
-
-            // creat data people
+ 
 $(document).on("click",".btn_creat",function(){
   $(".creat").show();   
  $(this).parents(".int").children(".show").show();

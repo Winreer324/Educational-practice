@@ -25,9 +25,9 @@
 		</div>
 		<!--  -->
 		<div class="row person creat_input  pt-4 pb-5 "> 
-			<input class="item col-md-2 ml-4 " type="text" placeholder="Должность">
-			<input class="item col-md-2 ml-4 " type="text" placeholder="Зарплата">
-			<input class="item col-md-2 ml-4 " type="text" placeholder="Данные человека">
+			<input class="item col-md-2 ml-4 " data-type='s' name='position' type="text" placeholder="Должность">
+			<input class="item col-md-2 ml-4 " data-type='i' name='salary' type="text" placeholder="Зарплата">
+			<input class="item col-md-2 ml-4 " data-type='i' name="data_person_id" type="text" placeholder="Данные человека">
 			<div class="row ml-5 test">
 				<button class="btn_creat_true border-primary blue-gradient btn">
 					<i class="creat_check">add</i>
@@ -48,12 +48,7 @@
 			<div class="item col-md-4 ml-2">Данные человека (id)</div> 
 		</div>
 		<hr>
-		<!--  -->
-	<!-- 	<div class="row  mr-0 pt-4 pb-5 ">
-			<input class="item col-md-2 ml-5 " type="text" placeholder="#">
-			<input class="item col-md-2 ml-4 " type="text" placeholder="Должность">
-			<input class="item col-md-2 ml-4 " type="text" placeholder="Зарплата">
-			<input class="item col-md-2 ml-4 " type="text" placeholder="Данные человека"> -->
+ 
 
 			<?php
                   $query = "SELECT * FROM staff"; //записываем запрос на выборку данных
@@ -63,10 +58,10 @@
                   {
                   	echo "
                   	<div class='row person input pt-4 pb-5 mr-0'>
-						<input class='item col-md ml-5 id_id' type='text' placeholder='#' value='{$data[$i]['id_staff']}'>
-						<input class='item col-md-2 ml-4 ' type='text' placeholder='Должность' value='{$data[$i]['position']}'>
-						<input class='item col-md-2 ml-4 ' type='text' placeholder='Зарплата' value='{$data[$i]['salary']}'> 
-						<input class='item col-md-2 ml-4 ' type='text' placeholder='Данные человека' value='{$data[$i]['data_person_id']}'>   
+						<input class='item col-md ml-5 id_id' data-type='i' name='id_staff' type='text' placeholder='#' value='{$data[$i]['id_staff']}'>
+						<input class='item col-md-2 ml-4 ' data-type='s' name='position' type='text' placeholder='Должность' value='{$data[$i]['position']}'>
+						<input class='item col-md-2 ml-4 ' data-type='i' name='salary' type='text' placeholder='Зарплата' value='{$data[$i]['salary']}'> 
+						<input class='item col-md-2 ml-4 ' data-type='i' name='data_person_id' type='text' placeholder='Данные человека' value='{$data[$i]['data_person_id']}'>   
 
 						<div class='row ml-5 int'>
 							<div class='show'>
