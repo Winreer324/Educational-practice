@@ -32,19 +32,19 @@ $connect = new DBConnection(); //создаём экземпляр класса 
 				<div class="nav_my collapse navbar-collapse col-md-5">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item">
-							<a href="../data_person.php" class="nav-link waves-effect">Данные людей</a>
+							<a href="data_person.php" class="nav-link waves-effect">Данные людей</a>
 						</li>
 						<li class="nav-item">
-							<a href="../date_visit.php" class="nav-link waves-effect">Посещение</a>
+							<a href="date_visit.php" class="nav-link waves-effect">Посещение</a>
 						</li>
 						<li class="nav-item">
-							<a href="../services.php" class="nav-link waves-effect">Услуги</a>
+							<a href="services.php" class="nav-link waves-effect">Услуги</a>
 						</li>
 						<li class="nav-item">
-							<a href="../staff.php" class="nav-link waves-effect">Сотрудники</a>
+							<a href="staff.php" class="nav-link waves-effect">Сотрудники</a>
 						</li>
 						<li class="nav-item">
-							<a href="../visitors.php" class="nav-link waves-effect">Посетители</a>
+							<a href="visitors.php" class="nav-link waves-effect">Посетители</a>
 						</li>
 					</ul>
 				</div>

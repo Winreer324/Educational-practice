@@ -1,5 +1,5 @@
 <?php
-	include "admin/index.php";
+	include "index.php";
 
 ?>
 

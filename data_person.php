@@ -1,5 +1,5 @@
 <?php
-	include "admin/index.php";
+	include "index.php";
 	// $stmt = "DELETE FROM `data_person` WHERE `id_data_person`=50 ; ";
 ?>
 
