@@ -36,63 +36,113 @@ class DBConnection
 	public function makePreparedQuery($table, $operationType, $rowId = "", $valuesTypes = "", $fields = "", $values = "")
 	{
 		$getTable = $_POST['getTable'];
-		$getIDTable = $_POST['idTable'];
-		var_dump("CRUD.php var_dump getTable");
-		var_dump($getTable); 
+		$getIDTable = $_POST['idTable']; 
 
-			if($operationType == 'delete'){
-				var_dump($getIDTable);
-				$query = "DELETE FROM $table WHERE $getIDTable=$rowId ; ";
-				// $stmt->execute();
-				$stmt = $this->conn->prepare($query);
-				// $sql = "DELETE FROM pages WHERE id=$id"; 
-				$stmt->execute(); 
-				var_dump("delete this row");
-			}else var_dump("error delete");
+		if($operationType == 'delete'){ 
+			$query = "DELETE FROM $table WHERE `$getIDTable`='$rowId' ; ";
+			$stmt = $this->conn->prepare($query); 
+			$stmt->execute();  
+		}else var_dump("error delete");
 
-			
-			if ($operationType == 'update')
+									//update
+			//data_person
+			if ($table == 'data_person' && $operationType == 'update')
 			{
-				$arr = json_decode($values, true);
-				var_dump($arr);
+				$arr = json_decode($values, true); 
 				$id = $arr[0];
 				$fname = $arr[1];
 				$lname = $arr[2];
 				$sname = $arr[3];
-				$phone = $arr[4];
-				var_dump($getIDTable);
-				var_dump($values);
-				var_dump($id);
-				var_dump($fname);
-				var_dump($lname);
-				var_dump($sname);
-				var_dump($phone);
+				$phone = $arr[4]; 
 
-				$query = "UPDATE $table SET '$getIDTable`='$id', `phone`='$phone', `Fname`='$fname', `Lname`='$lname', `Sname`='$sname' WHERE `id_data_person`='$id' ;";
+				$query = "UPDATE $table SET `$getIDTable`='$id',`phone`='$phone',`Fname`='$fname',`Lname`='$lname',`Sname`='$sname' WHERE `$getIDTable`=$id;";
 				  
 				var_dump($query);
 				$stmt = $this->conn->prepare($query);  //подготавливается запроc
 				$stmt->execute(); //запрос выполняется 
 
 			} else var_dump("error update"); 
+			//data_person
 
+			//date_visit
+			if ($table == 'date_visit' && $operationType == 'update')
+			{
+				$arr = json_decode($values, true); 
+				$id = $arr[0];
+				$visitors_id = $arr[1];
+				$date = $arr[2]; 
+
+				$query = "UPDATE $table SET `$getIDTable`='$id',`visitors_id`='$visitors_id',`date`='$date' WHERE `$getIDTable`=$id;";
+				   
+				$stmt = $this->conn->prepare($query);  //подготавливается запроc
+				$stmt->execute(); //запрос выполняется 
+
+			} else var_dump("error update"); 
+			//date_visit
+
+			//services
+			if ($table == 'services' && $operationType == 'update')
+			{
+				$arr = json_decode($values, true); 
+				$id = $arr[0];
+				$services_date_visit_id = $arr[1];
+				$services = $arr[2];  
+
+				$query = "UPDATE $table SET `$getIDTable`='$id',`services_date_visit_id`='$services_date_visit_id',`services`='$services' WHERE `$getIDTable`=$id;";
+				   
+				$stmt = $this->conn->prepare($query);  //подготавливается запроc
+				$stmt->execute(); //запрос выполняется 
+			} else var_dump("error update"); 
+			//services
+
+			//staff
+			if ($table == 'staff' && $operationType == 'update')
+			{
+				$arr = json_decode($values, true); 
+				$id = $arr[0];
+				$position = $arr[1];
+				$salary = $arr[2];  
+				$data_person_id = $arr[3];  
+
+				$query = "UPDATE $table SET `$getIDTable`='$id',`position`='$position',`salary`='$salary',`data_person_id`='$data_person_id' WHERE `$getIDTable`='$id';";
+				  
+				var_dump($query);
+				$stmt = $this->conn->prepare($query);  //подготавливается запроc
+				$stmt->execute(); //запрос выполняется 
+
+			} else var_dump("error update"); 
+			//staff
+
+			//visitors
+			if ($table == 'visitors' && $operationType == 'update')
+			{
+				$arr = json_decode($values, true); 
+				$id = $arr[0];
+				$date_visit_id = $arr[1];
+				$data_person_id = $arr[2];  
+				$services_id = $arr[3];  
+
+				$query = "UPDATE $table SET `$getIDTable`='$id',`date_visit_id`='$date_visit_id',`data_person_id`='$data_person_id',`services_id`='$services_id' WHERE `$getIDTable`=$id;";
+				  
+				var_dump($query);
+				$stmt = $this->conn->prepare($query);  //подготавливается запроc
+				$stmt->execute(); //запрос выполняется 
+			} else var_dump("error update"); 
+			//visitors
+										//insert
 			//data_person
 			if ($table == 'data_person' && $operationType == 'insert')
-			{
-				// $query = "INSERT INTO $table ($impFields) VALUES ($impPlaceholders)";
+			{ 
 				$fname = $values[0];
 				$lname = $values[1];
 				$sname = $values[2];
 				$phone = $values[3];
 
 				
-				$query = "INSERT INTO $table  ( `phone`, `Fname`, `Lname`, `Sname`) VALUES ( '$phone', '$fname', '$lname', '$sname');";
-				// $query = "INSERT INTO $table  (`$getIDTable`, `phone`, `Fname`, `Lname`, `Sname`) VALUES (NULL, '$phone', '$fname', '$lname', '$sname');";
-				// -- $query = "INSERT INTO `data_person`  (`id_data_person`, `phone`, `Fname`, `Lname`, `Sname`) VALUES (NULL, 'phone', 'fname', 'lname', 'sname');";
-				var_dump($query);
+				$query = "INSERT INTO $table  ( `phone`, `Fname`, `Lname`, `Sname`) VALUES ( '$phone', '$fname', '$lname', '$sname');"; 
+				
 				$stmt = $this->conn->prepare($query);  //подготавливается запроc
-				$stmt->execute(); //запрос выполняется 
-				var_dump("ok insert data_person");
+				$stmt->execute(); //запрос выполняется  
 			}  
 			//data_person
 
@@ -100,21 +150,11 @@ class DBConnection
 			if ($table == 'date_visit' && $operationType == 'insert')
 			{ 
 				$visitors_id = $values[0];
-				$date = $values[1]; 
-
-				var_dump($getIDTable);
-				var_dump($visitors_id);
-				var_dump($date);  
-
-				// $oDateTime2= DateTime::createFromFormat( 'Y-m-d', $Tdate);
-				// $date =  $oDateTime2->format('Y-m-d');
-				var_dump($date);
-				// var_dump($fname);
+				$date = $values[1];  
 				$query = "INSERT INTO $table  ( `visitors_id`, `date`) VALUES ( '$visitors_id', '$date');"; 
-				var_dump($query);
+
 				$stmt = $this->conn->prepare($query);  //подготавливается запроc
-				$stmt->execute(); //запрос выполняется 
-				var_dump("ok insert date_visit");
+				$stmt->execute(); //запрос выполняется  
 			} 
 			//date_visit
 
@@ -124,14 +164,10 @@ class DBConnection
 				$services_date_visit_id = $values[0];
 				$services = $values[1]; 
 
-				var_dump($services_date_visit_id);
-				var_dump($services);  
+				$query = "INSERT INTO $table  ( `services_date_visit_id`, `services`) VALUES ( '$services_date_visit_id', '$services');";  
 
-				$query = "INSERT INTO $table  ( `services_date_visit_id`, `services`) VALUES ( '$services_date_visit_id', '$services');"; 
-				var_dump($query);
 				$stmt = $this->conn->prepare($query);  //подготавливается запроc
-				$stmt->execute(); //запрос выполняется 
-				var_dump("ok insert services");
+				$stmt->execute(); //запрос выполняется  
 			} 
 			//services
 
@@ -140,17 +176,12 @@ class DBConnection
 			{ 
 				$position = $values[0];
 				$salary = $values[1]; 
-				$data_person_id = $values[2];  
-
-				var_dump($position);
-				var_dump($salary);  
-				var_dump($data_person_id);  
+				$data_person_id = $values[2]; 
 
 				$query = "INSERT INTO $table  (`position`, `salary`, `data_person_id` ) VALUES ( '$position', '$salary','$data_person_id');"; 
-				var_dump($query);
+
 				$stmt = $this->conn->prepare($query);  //подготавливается запроc
-				$stmt->execute(); //запрос выполняется 
-				var_dump("ok insert staff");
+				$stmt->execute(); //запрос выполняется  
 			} 
 			//staff
 
@@ -159,18 +190,12 @@ class DBConnection
 			{ 
 				$date_visit_id = $values[0];
 				$data_person_id = $values[1]; 
-				$services_id = $values[2];  
+				$services_id = $values[2]; 
 
-				var_dump($date_visit_id);
-				var_dump($data_person_id);  
-				var_dump($services_id);  
+				$query = "INSERT INTO $table  ( `date_visit_id`, `data_person_id`, `services_id` ) VALUES ( '$date_visit_id', '$data_person_id','$services_id');";  
 
-				$query = "INSERT INTO $table  ( `date_visit_id`, `data_person_id`, `services_id` ) VALUES ( '$date_visit_id', '$data_person_id','$services_id');"; 
-				// $query = "INSERT INTO $table  ( `date_visit_id`, `data_person_id`, `services_id` ) VALUES ( 15,7,13);"; 
-				var_dump($query);
 				$stmt = $this->conn->prepare($query);  //подготавливается запроc
-				$stmt->execute(); //запрос выполняется 
-				var_dump("ok insert visitors");
+				$stmt->execute(); //запрос выполняется  
 			} 
 			//visitors
 	}

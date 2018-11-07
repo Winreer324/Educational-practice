@@ -31,7 +31,7 @@ $(document).on("click",".btn_delate",function(e){
   e.preventDefault(); 
   let id = $(this).parents(".input").find(".id_id").val();
   console.log(id);
-  alert(id);
+  // alert(id);
   let inputs = $(this).parents(".input").find("input");
   let fields = [];
   let values = [];
@@ -48,7 +48,7 @@ $(document).on("click",".btn_delate",function(e){
     console.log(inputs);
   })
   $.ajax({
-    url: '../Educational-practice/php/CRUD.php',
+    url: 'php/CRUD.php',
     type: 'POST',
     data: {
       table: table,
@@ -106,7 +106,7 @@ $(document).on("click",".btn_change_check",function(e){
   }) 
 
   $.ajax({
-    url: '../Educational-practice/php/CRUD.php',
+    url: 'php/CRUD.php',
     type: 'POST',
     data: {
       table: table,
@@ -142,7 +142,7 @@ $(document).on("click",".btn_delate_close",function(){
 }); 
 
             // creat data people
-$(document).on("click",".btn_creat_data_person",function(){
+$(document).on("click",".btn_creat",function(){
   $(".creat").show();   
  $(this).parents(".int").children(".show").show();
   $(this).parents(".int").children(".hide").hide();  
@@ -150,7 +150,7 @@ $(document).on("click",".btn_creat_data_person",function(){
   addShowInput();
 });
 
-$(document).on("click",".btn_creat_data_person_true", function(e){ 
+$(document).on("click",".btn_creat_true", function(e){ 
   
   e.preventDefault(); 
   let inputs = $(".creat_input").parent().find("input");
@@ -167,7 +167,7 @@ $(document).on("click",".btn_creat_data_person_true", function(e){
     console.log(inputs);
   })
   $.ajax({
-    url: '../Educational-practice/php/CRUD.php',
+    url: 'php/CRUD.php',
     type: 'POST',
     data: {
       table: table,  
@@ -179,296 +179,21 @@ $(document).on("click",".btn_creat_data_person_true", function(e){
     success: function(response) {
       console.log(response);
       location.reload();
-      console.log("Данные отправленны creat data_person");
+      console.log("Данные отправленны creat ");
     },
     error: function(error) {
       console.log(error);
-      console.log("Данные не отправленны creat data_person");
+      console.log("Данные не отправленны creat ");
     }
   }) 
   
 });
 
-$(document).on("click",".btn_creat_data_person_false",function(){
+$(document).on("click",".btn_creat_false",function(){
   $(".creat").hide(); 
   addShowInput();
 });
 
-            //  creat data people end
-
-
-
-
-                              // data_person end
-
-
-
-                              // visitors start
- 
- 
-            // creat visitors
-
-$(document).on("click",".btn_creat_visitors",function(){
-  $(".creat").show();  
- $(".creat_input").parent().find("input").attr("disabled",false); 
-  $(this).parents(".int").children(".show").show();
-  $(this).parents(".int").children(".hide").hide(); 
-});
-
-$(document).on("click",".btn_creat_visitors_true",function(e){ 
-  // $("#person").append('<div class="row person creat_input  pt-4 pb-5 "><input class="item col-md-2 ml-5 " type="text" placeholder="#"><input class="item col-md-2 ml-4 " type="date" placeholder="Дата посещения"><input class="item col-md-2 ml-4 " type="text" placeholder="Данные человека"><input class="item col-md-2 ml-4 " type="text" placeholder="Услуга"><div class="row ml-5 int"><div class="show"><button class="btn_change_false border-primary blue-gradient btn ty"><i class="fa fa-edit"></i> </button><button class="btn_delate ml-3 border-primary blue-gradient btn ty"><i class="fa fa-trash"></i> </button></div><div class="hide"><button class="btn_change_false border-primary blue-gradient btn ty"> <i class="fa fa-check"></i></button><button class="btn_delate ml-3 border-primary blue-gradient btn ty"> <i class="fa fa-close"></i></button></div></div></div>');
-  $(".hide").hide();
-  $(".show").show(); 
-
-  e.preventDefault();  
-
-  let inputs = $(".creat_input").parent().find("input");
-  let fields = [];
-  let values = [];
-  let types = "";
-  let action = 'insert';
-  // let table = 'data_person';
-  let table =  showTable();
-  inputs.each(function() {
-    fields.push($(this).attr('name'));
-    values.push($(this).val());
-    types += $(this).attr('data-type');
-    console.log(inputs);
-  })
-  $.ajax({
-    url: '../Educational-practice/php/CRUD.php',
-    type: 'POST',
-    data: {
-      table: table,  
-      action: action,
-      fields: JSON.stringify(fields),
-      values: JSON.stringify(values),
-      types: types,
-    },
-    success: function(response) {
-      console.log(response);
-      location.reload();
-      console.log("Данные отправленны creat visitors");
-    },
-    error: function(error) {
-      // console.log(error);
-      console.log("Данные не отправленны creat visitors");
-    }
-  })  
-});
-
-$(document).on("click",".btn_creat_visitors_false",function(){
-  $(".creat").hide(); 
-  addShowInput();
-});
-
-
-                              // visitors end
-
-
-
-                              // data visit start
- 
- 
-            // creat visitors
-
-$(document).on("click",".btn_creat_data_visit",function(){
-  $(".creat").show();   
-  $(this).parents(".int").children(".show").show();
-  $(this).parents(".int").children(".hide").hide();
-  $(".creat_input").parent().find("input").attr("disabled",false); 
-  addShowInput();
-});
-
-$(document).on("click",".btn_creat_data_visit_true",function(e){ 
-  // $("#person").append('<div class="row  mr-0 pt-4 pb-5 ">  <input class="item col-md-1 ml-5 " type="text" placeholder="#">  <input class="item col-md-2 ml-4 " type="text" placeholder="Пользователь"> <input class="item col-md-2 ml-4 " type="date" placeholder="Дата посещения">  <div class="row ml-5 int"><div class="show"><button class="btn_change_false border-primary blue-gradient btn ty"><i class="fa fa-edit"></i> </button><button class="btn_delate ml-3 border-primary blue-gradient btn ty"><i class="fa fa-trash"></i> </button></div><div class="hide"><button class="btn_change_false border-primary blue-gradient btn ty"> <i class="fa fa-check"></i></button><button class="btn_delate ml-3 border-primary blue-gradient btn ty"> <i class="fa fa-close"></i></button></div></div></div> ');
-  $(".hide").hide();
-  $(".show").show();
-
-
-  e.preventDefault(); 
-
-  let inputs = $(".creat_input").parent().find("input");
-  let fields = [];
-  let values = [];
-  let types = "";
-  let action = 'insert';
-  // let table = 'data_person';
-  let table =  showTable();
-  inputs.each(function() {
-    fields.push($(this).attr('name'));
-    values.push($(this).val());
-    types += $(this).attr('data-type');
-    console.log(inputs);
-  })
-  $.ajax({
-    url: '../Educational-practice/php/CRUD.php',
-    type: 'POST',
-    data: {
-      table: table,  
-      action: action,
-      fields: JSON.stringify(fields),
-      values: JSON.stringify(values),
-      types: types,
-    },
-    success: function(response) {
-      console.log(response);
-      location.reload();
-      console.log("Данные отправленны creat data_visit");
-    },
-    error: function(error) {
-      // console.log(error);
-      console.log("Данные не отправленны creat data_visit");
-    }
-  }) 
-});
-
-$(document).on("click",".btn_creat_data_visit_false",function(){
-  $(".creat").hide(); 
-  addShowInput();
-});
-
-
-                              //  data visit end
-
-
-
-                              // services start
- 
- 
-            // creat services
-
-$(document).on("click",".btn_creat_services",function(){
-  $(".creat").show();   
-  $(".creat_input").parent().find("input").attr("disabled",false);  
-  $(this).parents(".int").children(".show").show();
-  $(this).parents(".int").children(".hide").hide();
-
-  addShowInput();
-});
-
-$(document).on("click",".btn_creat_services_true",function(e){ 
-  // $("#person").append('<div class="row  mr-0 pt-4 pb-5 "><div class="row ml-5 int"><div class="show"><button class="btn_change_false border-primary blue-gradient btn ty"><i class="fa fa-edit"></i> </button><button class="btn_delate ml-3 border-primary blue-gradient btn ty"><i class="fa fa-trash"></i> </button></div><div class="hide"><button class="btn_change_false border-primary blue-gradient btn ty"> <i class="fa fa-check"></i></button><button class="btn_delate ml-3 border-primary blue-gradient btn ty"> <i class="fa fa-close"></i></button></div></div></div> ');
-  $(".hide").hide();
-  $(".show").show();
-
- e.preventDefault(); 
-
-  let inputs = $(".creat_input").parent().find("input");
-  let fields = [];
-  let values = [];
-  let types = "";
-  let action = 'insert';
-  // let table = 'data_person';
-  let table =  showTable();
-  inputs.each(function() {
-    fields.push($(this).attr('name'));
-    values.push($(this).val());
-    types += $(this).attr('data-type');
-    console.log(inputs);
-  })
-  $.ajax({
-    url: '../Educational-practice/php/CRUD.php',
-    type: 'POST',
-    data: {
-      table: table,  
-      action: action,
-      fields: JSON.stringify(fields),
-      values: JSON.stringify(values),
-      types: types,
-    },
-    success: function(response) {
-      console.log(response);
-      location.reload();
-      console.log("Данные отправленны creat services");
-    },
-    error: function(error) {
-      console.log(error);
-      console.log("Данные не отправленны creat services");
-    }
-  }) 
-});
-
-$(document).on("click",".btn_creat_services_false",function(){
-  $(".creat").hide(); 
-  addShowInput();
-});
-
-
-                              //  services end
-
-
-
-                              // staff start
- 
- 
-            // creat staff
-
-$(document).on("click",".btn_creat_staff",function(){
-  $(".creat").show();  
-$(".creat_input").parent().find("input").attr("disabled",false);  
-  $(this).parents(".int").children(".show").show();
-  $(this).parents(".int").children(".hide").hide();
-
-  addShowInput();
-});
-
-$(document).on("click",".btn_creat_staff_true",function(e){ 
-  // $("#person").append('<div class="row  mr-0 pt-4 pb-5 ">  <input class="item col-md-1 ml-5 " type="text" placeholder="#">  <input class="item col-md-2 ml-4 " type="text" placeholder="Пользователь"> <input class="item col-md-2 ml-4 " type="date" placeholder="Дата посещения">  <div class="row ml-5 int"><div class="show"><button class="btn_change_false border-primary blue-gradient btn ty"><i class="fa fa-edit"></i> </button><button class="btn_delate ml-3 border-primary blue-gradient btn ty"><i class="fa fa-trash"></i> </button></div><div class="hide"><button class="btn_change_false border-primary blue-gradient btn ty"> <i class="fa fa-check"></i></button><button class="btn_delate ml-3 border-primary blue-gradient btn ty"> <i class="fa fa-close"></i></button></div></div></div> ');
-  $(".hide").hide();
-  $(".show").show();
-  
- e.preventDefault(); 
-
-  let inputs = $(".creat_input").parent().find("input");
-  let fields = [];
-  let values = [];
-  let types = "";
-  let action = 'insert';
-  // let table = 'data_person';
-  let table =  showTable();
-  inputs.each(function() {
-    fields.push($(this).attr('name'));
-    values.push($(this).val());
-    types += $(this).attr('data-type');
-    console.log(inputs);
-  })
-  $.ajax({
-    url: '../Educational-practice/php/CRUD.php',
-    type: 'POST',
-    data: {
-      table: table,  
-      action: action,
-      fields: JSON.stringify(fields),
-      values: JSON.stringify(values),
-      types: types,
-    },
-    success: function(response) {
-      console.log(response);
-      location.reload();
-      console.log("Данные отправленны creat staff");
-    },
-    error: function(error) {
-      console.log(error);
-      console.log("Данные не отправленны creat staff");
-    }
-  }) 
-});
-
-$(document).on("click",".btn_creat_staff_false",function(){
-  $(".creat").hide(); 
-  addShowInput();
-});
-
-
-                              //  staff end
-
-
-
-
-
-
-// // function 
 
 function addShowInput(){
   $(this).parents(".creat_input").children("input").attr("disabled",false); 

@@ -1,5 +1,5 @@
 <?php
-	include "index.php";
+	include "admin/index.php";
 
 ?>
 
@@ -8,7 +8,7 @@
 			<div class="container-fluid pt-3">
 				<div class="d-flex justify-content-end border=buttom border-primary pb-3">
 					<h4 class="mr-auto text-primary pl-3">Сотрудники</h4>
-					<buttom class="btn blue-gradient btn-sm my-0 p w-0 mr-3 btn_creat_staff">Добавить</buttom>
+					<buttom class="btn blue-gradient btn-sm my-0 p w-0 mr-3 btn_creat">Добавить</buttom>
 				</div>
 			</div>
 		</div>
@@ -29,10 +29,10 @@
 			<input class="item col-md-2 ml-4 " type="text" placeholder="Зарплата">
 			<input class="item col-md-2 ml-4 " type="text" placeholder="Данные человека">
 			<div class="row ml-5 test">
-				<button class="btn_creat_staff_true border-primary blue-gradient btn">
+				<button class="btn_creat_true border-primary blue-gradient btn">
 					<i class="creat_check">add</i>
 				</button>
-				<button class="btn_creat_staff_false ml-3 border-primary blue-gradient btn">
+				<button class="btn_creat_false ml-3 border-primary blue-gradient btn">
 					<i class="creat_close_staff">close</i>
 				</button>
 			</div>

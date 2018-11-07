@@ -1,79 +1,61 @@
 <?php
 
-require_once '../php/dbClass.php'; //подключаем файл с классом подключения к БД
+require_once 'php/dbClass.php'; //подключаем файл с классом подключения к БД
+// require_once 'php/dbClassTest.php'; //подключаем файл с классом подключения к БД
 $connect = new DBConnection(); //создаём экземпляр класса подключения к БД
 
 ?>
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Панель администратора</title>
-	<link rel="stylesheet" href="../css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
-</head>
-<body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-<div class="container">
-  <a class="navbar-brand" href="#">Панель администратора</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Таблица <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Таблица</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Таблица</a>
-      </li>
-    </ul>
-  </div>
-</div>
-</nav>
-<div class="container">
-	<div class="pb-2 mt-4 mb-2 d-flex justify-content-end border-bottom">
-		<h2 class="mr-auto">Детали</h2>
-		<a href="" class="btn btn-success">Добавить</a>
-	</div>
-			<table class="table table-hover my-3">
-		  		<thead class="thead-light">
-			    	<tr>
-			        	<th scope="col">id</th>
-			      	 	<th scope="col">Имя</th>
-			      	 	<th scope="col">Логин</th>
-			      		<th scope="col">Пароль</th>
-			      		<th scope="col">Действия</th>
-			    	</tr>
-		  		</thead>
-			  	<tbody>
-			  	<?php
-                  $query = "SELECT * FROM data_person"; //записываем запрос на выборку данных
-                  $queryResult = $connect->makeUnpreparedQuery($query); //выполняем запрос записываем ответ MySQL в $queryResult
-                  $data = $connect->fetch($queryResult); //данные полученные из MySQL преабоазовываем в ассоциативный массив
-                  for($i = 0, $count = sizeof($data); $i < $count; $i++) // выводим данные в виде строк HTML-таблицы 
-                  {
-                  	echo "
-                  	<tr>
-			      		<th scope='row'> {$data[$i]['id_data_person']}</th>
-			      		<td><input class='form-control' name='name' disabled type='text' value='{$data[$i]['Fname']}'></td>
-			      		<td><input class='form-control' name='login' disabled type='text' value='{$data[$i]['Lname']}'></td>
-			      		<td><input class='form-control' name='password' disabled type='text' value='{$data[$i]['Sname']}'></td>
-			      		<td><input class='form-control' name='password' disabled type='text' value='{$data[$i]['phone']}'></td>
-			      		<td><div class='icons-ed-del'><i data-opType='update' class='btn btn-light mr-2 far fa-edit fa-lg' style='color: #339af0;'></i><i data-opType='delete' class='btn btn-light far fa-trash-alt fa-lg' style='color: #ff6b6b;'></i></div>
-			      		</td>
-			    	</tr>
-                  	";                  
-                  }
-                 ?>
-			  	</tbody>
-			</table>
-</div>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Admin Page Barbershop</title>
+	<!-- Your custom styles (optional) -->
+  <link href="css/style.css" rel="stylesheet">
+    <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="css/mdb.min.css" rel="stylesheet">
 
-<script src="../js/jquery-3.3.1.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
+</head>
+		
+<body class="grey lighten-2 mr-0">
+	<section class="mr-0">
+
+		<nav class="navbar fixed-top navbar-expand-lg navbar-ligth white scrolling-navbar mb-5">
+			<div class="container-fluid pt-3 pb-3">
+				<a href="index.php" class="navbar-brand waves-effect"><strong class="text-primary">Панель администратора</strong></a>
+				<div class="nav_my collapse navbar-collapse col-md-5">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<a href="../data_person.php" class="nav-link waves-effect">Данные людей</a>
+						</li>
+						<li class="nav-item">
+							<a href="../date_visit.php" class="nav-link waves-effect">Посещение</a>
+						</li>
+						<li class="nav-item">
+							<a href="../services.php" class="nav-link waves-effect">Услуги</a>
+						</li>
+						<li class="nav-item">
+							<a href="../staff.php" class="nav-link waves-effect">Сотрудники</a>
+						</li>
+						<li class="nav-item">
+							<a href="../visitors.php" class="nav-link waves-effect">Посетители</a>
+						</li>
+					</ul>
+				</div>
+			</div> 
+		</nav>
+
+
+
+
+</section>
+
+ 
 </body>
 </html>
