@@ -72,6 +72,7 @@ class DBConnection {
 		{  
 			$query = "DELETE FROM $table WHERE `$getIDTable`='$rowId' ; ";
 			$stmt = $this->conn->prepare($query); 
+			var_dump($query);
 			var_dump("ok, delete this row");
 		}
 		 //bind_param привязывает значения полей к параметрам подготавливаемого запроса

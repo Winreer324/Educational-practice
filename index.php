@@ -11,7 +11,7 @@ $connect = new DBConnection(); //создаём экземпляр класса 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-	<title>Admin Page Barbershop</title>
+	<title>Панель администратора</title>
 	<!-- Your custom styles (optional) -->
   <link href="css/style.css" rel="stylesheet">
     <!-- Font Awesome -->
